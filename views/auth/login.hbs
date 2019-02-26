@@ -1,0 +1,42 @@
+<h1>Login:</h1>
+<br>
+{{#if newUser}}
+<form action="/signup" method="POST">
+  <label for="">Email: </label>
+    <input type="text" name="email" value={{email}}>
+    <br>
+    <br>
+  <label for="">Password: </label>
+  <input type="password" name="password" id="">
+    <br>
+    <br>
+{{else}} {{#if existingUser}}
+<form action="/login" method="POST">
+  <label for="">Email: </label>
+  <input type="text" name="email" value={{email}}>
+    <br>
+    <br>
+  <label for="">Password</label>
+  <input type="password" name="password" id="">
+  <br>
+  <br>
+{{else}}
+{{/if}}
+
+{{#if_eq newUser null}}
+{{#if_eq existingUser null}}
+<form action="/email-auth" method="POST">
+  <label for="">Email: </label>
+  <input type="text" name="email" id="">
+  <br>
+  <br>
+{{/if_eq}}
+{{/if_eq}}
+
+{{/if}}
+  <button type="submit">Submit</button>
+</form>
+
+{{#if errorMessage}}
+  <h3> {{errorMessage}}</h3> 
+{{/if}}

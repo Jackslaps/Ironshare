@@ -1,0 +1,33 @@
+{
+  "name": "module-2-crud-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "DEBUG=module-2-crud-project:* nodemon ./bin/www",
+    "dev-windows": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.407.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "gridfs": "^1.0.0",
+    "hbs": "^4.0.2",
+    "mongoose": "^5.2.10",
+    "morgan": "^1.9.0",
+    "multer": "^1.4.1",
+    "multer-s3": "^2.9.0",
+    "node-sass-middleware": "^0.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.5.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
