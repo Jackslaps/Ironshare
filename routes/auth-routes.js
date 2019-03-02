@@ -17,7 +17,6 @@ router.post('/email-auth', (req, res, next) => {
 
   User.findOne({email: userEmail})
   .then(user => {
-    console.log(user.password);
     if(!user) {
       res.render('auth/login', {errorMessage: "You are not approved to enter this site"})
     }
@@ -37,7 +36,7 @@ router.post('/login', (req, res, next) => {
     User.findOne({email: userEmail})
     .then(user => {
         if(bcrypt.compareSync(userPassword, user.password)) {
-          res.render('directory-select');
+          res.redirect('directory-select');
         }
         else {
             res.render('auth/login', {errorMessage: "Incorrect password"});
@@ -62,12 +61,27 @@ router.post('/signup', (req, res, next) => {
       //name: userName,
       email: userEmail,   
       password: hashPass,
-      role: 'User'
+      role: 'User',
+      canView: true
     })
     .then(newUser => {
         res.redirect('directory-select');
     })
   .catch(error => console.log("Error while checking if user exists: ", error));
+})
+
+router.get('/create-account', (req, res, next) => {
+  res.render('auth/create-account');
+})
+
+router.post('/new-arrival', (req, res, next) => {
+  const userEmail = req.body.email;
+  const userReason = req.body.reason;
+
+  if(userEmail == "" || userReason == "") {
+    res.render('auth/new-arrival', {errorMessage: "Please provide both your email and your relation to IronHack"});
+    return;
+  };
 })
 
 router.get('/logout', (req, res, next) => {

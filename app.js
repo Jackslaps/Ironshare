@@ -60,9 +60,9 @@ app.use('/', index);
 
 app.use('/', require('./routes/auth-routes'));
 
-//app.use('/', require('./routes/user-routes'));
+app.use('/', require('./routes/user-routes'));
 
-//app.use('/', require('./routes/book-routes'));
+//app.use('/', require('./routes/files-routes'));
 
 //app.use('/', require('./routes/upload-routes'));
 
