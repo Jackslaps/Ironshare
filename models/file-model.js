@@ -9,10 +9,10 @@ const fileSchema = new Schema({
   author: String,
   series: String,
   language: String,
-  difficulty: {type: String, enum: ['Beginner', 'Intermediate', 'Expert']},
   description: {type: String, maxlength: 2000},
   review: {type: Schema.Types.ObjectId, ref: 'Review'},
-  isCopyright: {type: Boolean, required: true, default: true}
+  isCopyright: {type: Boolean, required: true, default: true},
+  downloadLink: String
 })
 
 module.exports = mongoose.model('File', fileSchema);

@@ -36,7 +36,7 @@ router.post('/login', (req, res, next) => {
     User.findOne({email: userEmail})
     .then(user => {
         if(bcrypt.compareSync(userPassword, user.password)) {
-          res.redirect('directory-select');
+          res.render('directory-select');
         }
         else {
             res.render('auth/login', {errorMessage: "Incorrect password"});
@@ -65,7 +65,7 @@ router.post('/signup', (req, res, next) => {
       canView: true
     })
     .then(newUser => {
-        res.redirect('directory-select');
+        res.render('directory-select');
     })
   .catch(error => console.log("Error while checking if user exists: ", error));
 })
