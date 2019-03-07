@@ -3,7 +3,7 @@
 <p>If you wish to upload to the server click <a href='/upload'>here</a></p>
 
 <ul>
-{{#each files}}
+{{#each filesInDB}}
   <li>
     Title: {{this.title}}
     <br>
@@ -13,12 +13,7 @@
     <br>
     Language: {{this.language}}
     <br>
-    Description: <p>{{this.description}}</p>
     <br>
-    Copyright: {{this.isCopyright}}
-    <br>
-    <br>
-    
   </li>
 </ul>
 {{/each}}

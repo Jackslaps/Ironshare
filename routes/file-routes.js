@@ -72,7 +72,7 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
   })
   //console.log("req.file: ", req.file);
   //res.json({file: req.file});
-  res.redirect('upload');
+  res.render('directory-select');
 })
 
 router.get('/files', (req, res, next) => {
