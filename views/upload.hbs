@@ -3,7 +3,53 @@
 <form enctype="multipart/form-data" action="/upload" method="POST">
   <label for="">Select a file</label>
   <input id="file" type="file" name="file">
+
   <br>
   <br>
+
+  <label for="">Title: </label>
+  <input type="text" name="title" id="">
+  
+  <br>
+  <br>
+
+  <label for="">Author: </label>
+  <input type="text" name="author">
+  
+  <br>
+  <br>
+
+  <label for="">Series: </label>
+  <input type="text" name="series" id="">
+  
+  <br>
+  <br>
+
+  <label for="">Language: </label>
+  <input type="text" name="language" id="">
+  
+  <br>
+  <br>
+
+  <label for="">Description: </label>
+  <br>
+  <textarea name="description" id="" cols="50" rows="10" placeholder="Description here"></textarea>
+
+  <br>
+  <br>
+
+  <label for="">Does this file have a copyright? (Assume yes if not sure) </label>
+  <input type="radio" name="isCopyright" value="true"> Yes
+  <input type="radio" name="isCopyright" value="false"> No
+
+  <br>
+  <br>
+  
+  <h1>WE ARE NOT RESPONSIBLE FOR THE HOSTING OF COPYRIGHTED MATERIAL</h1>
+  <h1>ALL UPLOADS FALL UNDER THE RESPONSIBILITY OF THE UPLOADER</h1>
+  
+  <br>
+  
   <button type="submit">Upload</button>
+
 </form>

@@ -1,6 +1,3 @@
-const aws = require('aws-sdk')
-const uuid = require('uuid');
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -12,10 +9,8 @@ const fileSchema = new Schema({
   description: {type: String, maxlength: 2000},
   review: {type: Schema.Types.ObjectId, ref: 'Review'},
   isCopyright: {type: Boolean, required: true, default: true},
-  downloadLink: String
+  downloadLink: String,
+  filename: String
 })
 
 module.exports = mongoose.model('File', fileSchema);
-
-
-//
