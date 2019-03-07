@@ -13,7 +13,7 @@ const path                = require('path');
 //const fileStream          = fs.createReadStream(file)
 const crypto              = require('crypto');
 
-const mongoURI = 'mongodb://localhost/ironshare';
+const mongoURI = process.env.MONGODB_URI;
 const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
 
 let gfs;
