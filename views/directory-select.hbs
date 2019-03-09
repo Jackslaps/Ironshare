@@ -3,7 +3,7 @@
 <p>If you wish to upload to the server click <a href='/upload'>here</a></p>
 
 <ul>
-{{#each filesInDB}}
+{{#each filesFromDB}}
   <li>
     Title: {{this.title}}
     <br>
@@ -14,6 +14,9 @@
     Language: {{this.language}}
     <br>
     <br>
+    <form action="/download" method="GET">
+      <button type="submit">Download</button>
+    </form>
   </li>
 </ul>
 {{/each}}

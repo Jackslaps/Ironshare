@@ -6,8 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
+  <nav>
+      {{#if admin}}
+      <a href="/admin">Admin</a>
+      {{/if}}
+      {{#if canView}}
+      <a href="/directory-select">File Directory</a>
+      <a href="/upload">Upload files</a>
+      <a href="/logout">Log out</a>
+      {{/if}}
+  </nav>
 
   {{{body}}}
 

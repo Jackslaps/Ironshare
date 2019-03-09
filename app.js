@@ -9,6 +9,8 @@ const hbs            = require('hbs');
 const logger         = require('morgan');
 const path           = require('path');
 const methodOverride = require('method-override');
+const session        = require('express-session');
+const MongoStore     = require('connect-mongo')(session);
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
@@ -32,13 +34,6 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 // Express View engine setup
-app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
-      
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -56,6 +51,32 @@ hbs.registerHelper('if_eq', function(a, b, opts) {
   }
 });
 
+//Session creation - User persistence
+app.use(session({
+  secret: '_secret_', 
+  cookie: { maxAge: 60 * 60 * 1000 }, 
+  saveUninitialized: false, 
+  resave: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
+
+app.use((req, res, next) => {
+  if(!req.session.user) {  
+    next()
+    return;
+  }
+
+  let admin = false;
+  let canView = false;
+
+  if(req.session.user.role === "admin") { admin = true};
+  if(req.session.user.canView === true) { canView = true};
+
+  res.locals.admin = admin;
+  res.locals.canView = canView;
+  next()
+})
+
 //Routes
 const index = require('./routes/index');
 app.use('/', index);
@@ -65,8 +86,6 @@ app.use('/', require('./routes/auth-routes'));
 app.use('/', require('./routes/user-routes'));
 
 app.use('/', require('./routes/file-routes'));
-
-//app.use('/', require('./routes/upload-routes'));
 
 module.exports = app;
 

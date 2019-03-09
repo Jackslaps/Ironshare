@@ -1,4 +1,4 @@
-const File = require('../models/file-model');
+const File                = require('../models/file-model');
 const express             = require('express');
 const router              = express.Router();
 const mongoose            = require('mongoose');
@@ -7,8 +7,8 @@ const mongoose            = require('mongoose');
 const multer              = require('multer');
 const GridFSStorage       = require('multer-gridfs-storage');
 const Grid                = require('gridfs-stream');
-const s3                  = require('multer-s3');
-const path                = require('path');
+//const s3                  = require('multer-s3');
+//const path                = require('path');
 //const fs                  = require('fs');
 //const fileStream          = fs.createReadStream(file)
 const crypto              = require('crypto');
@@ -34,7 +34,6 @@ const storage = new GridFSStorage({
         if (err) {
           return reject(err);
         }
-        const filename = buf.toString('hex') + path.extname(file.originalname);
         fileInfo = {
           filename: filename,
           bucketName: 'uploads',
@@ -68,10 +67,7 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
       .then(updatedFile => {
         console.log("Updated file:", updatedFile)
       })
-    //console.log('new file:', newFile)
   })
-  //console.log("req.file: ", req.file);
-  //res.json({file: req.file});
   res.render('directory-select');
 })
 
@@ -99,9 +95,16 @@ router.get('/files/:filename', (req, res, next) => {
   })
 })
 
-// @route GET /download/:filename
-// @desc  Download single file object
-router.get('/download/:filename', (req, res) => {
+router.get('/download', (req, res, next) => {
+  File.find().populate
+    .then(filesFromDB => {
+      filesFromDB.forEach(file => {
+
+      })
+    })
+})
+
+router.get('/download/:filename', (req, res, next) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     // Check if file
     if (!file || file.length === 0) {
@@ -124,6 +127,10 @@ router.get('/download/:filename', (req, res) => {
     readstream.pipe(res);
   });
 });
+
+router.get('/directory-select', (req, res, next) => {
+  res.render('directory-select');
+})
 
 module.exports = router;
 
