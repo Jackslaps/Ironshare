@@ -8,7 +8,7 @@ const multer              = require('multer');
 const GridFSStorage       = require('multer-gridfs-storage');
 const Grid                = require('gridfs-stream');
 //const s3                  = require('multer-s3');
-//const path                = require('path');
+const path                = require('path');
 //const fs                  = require('fs');
 //const fileStream          = fs.createReadStream(file)
 const crypto              = require('crypto');
@@ -28,22 +28,21 @@ conn.once('open', () => {
 const storage = new GridFSStorage({
   url: mongoURI,
   file: (req, file) => {
-    console.log("req.body:", req.body)
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {
           return reject(err);
         }
+        filename = buf.toString('hex') + path.extname(file.originalname);
         fileInfo = {
           filename: filename,
-          bucketName: 'uploads',
+          bucketName: 'uploads'
         };
         resolve(fileInfo);
       });
     });
   }
 });
-
 const upload = multer({ storage });
 
 router.get('/upload', (req, res, next) => {
@@ -51,8 +50,6 @@ router.get('/upload', (req, res, next) => {
 })
 
 router.post('/upload', upload.single('file'), (req, res, next) => {
-  //console.log("fileInfo:",fileInfo);
-
   File.create({
     title: req.body.title,
     author: req.body.author,
@@ -62,13 +59,14 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
     isCopyright: req.body.isCopyright,
   })
   .then(newFile => {
+    console.log("before save: ", newFile)
     newFile.filename = fileInfo.filename
     newFile.save()
       .then(updatedFile => {
         console.log("Updated file:", updatedFile)
       })
   })
-  res.render('directory-select');
+  res.redirect('directory-select');
 })
 
 router.get('/files', (req, res, next) => {
@@ -93,15 +91,6 @@ router.get('/files/:filename', (req, res, next) => {
 
     return res.json(file);
   })
-})
-
-router.get('/download', (req, res, next) => {
-  File.find().populate
-    .then(filesFromDB => {
-      filesFromDB.forEach(file => {
-
-      })
-    })
 })
 
 router.get('/download/:filename', (req, res, next) => {
@@ -129,7 +118,10 @@ router.get('/download/:filename', (req, res, next) => {
 });
 
 router.get('/directory-select', (req, res, next) => {
-  res.render('directory-select');
+  File.find()
+  .then(allFiles => {
+    res.render('directory-select', {filesFromDB: allFiles})
+  })
 })
 
 module.exports = router;

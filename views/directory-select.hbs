@@ -1,22 +1,22 @@
 <h1>Here you will select the directories you want to download stuff from</h1>
 <br>
 <p>If you wish to upload to the server click <a href='/upload'>here</a></p>
-
-<ul>
+<br>
 {{#each filesFromDB}}
-  <li>
-    Title: {{this.title}}
-    <br>
-    Author: {{this.author}}
-    <br>
-    Series: {{this.series}}
-    <br>
-    Language: {{this.language}}
-    <br>
-    <br>
-    <form action="/download" method="GET">
-      <button type="submit">Download</button>
-    </form>
-  </li>
-</ul>
+<div>
+  Title: {{this.title}}
+  <br>
+  Author: {{this.author}}
+  <br>
+  Series: {{this.series}}
+  <br>
+  Language: {{this.language}}
+  <br>
+  <br>
+  <form action="/download/{{this.filename}}" method="GET">
+    <button type="submit">Download</button>
+  </form>
+  <br>
+  <br>
+</div>
 {{/each}}
