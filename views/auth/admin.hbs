@@ -1,8 +1,6 @@
 {{#if admin}}
+<br>
 <h1>Admin page</h1>
-<br>
-Admin menu:
-<br>
 <br>
   <button type="button" id="create-user-button">Create a user</button>
   <br>
@@ -21,11 +19,57 @@ Admin menu:
     <br>
     <button type="submit">Submit</button>
   </form>
-
+  <br>
+  <br>
+  <h5>Manage Users</h5>
+  <br>
+  {{#each usersFromDB}}
+  <div class="card>">
+    Email: {{this.email}}
+    <br>
+    Role: {{this.role}}
+    <br><br>
+    <form action="/admin/change-role/{{this._id}}" method="POST">
+      <select name="changeRole" id="" placeholder="Change role">
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+        <option value="guest">Guest</option>
+      </select>
+      <button type="submit">Submit changes</button>
+    </form>
+    <br>
+    <form action="/admin/delete-user/{{this._id}}" method="GET">
+      <button type="submit">Delete user</button>
+    </form>
+  </div>
+    <br>
+    <br>
+  {{/each}}
 <br>
 <br>
 
 Approvals:
+
+{{#each unapprovedFromDB}}
+    <br>
+    <br>
+  {{this.email}}
+    <br>
+  {{this.relation}}
+    <br>
+    <br>
+  <form action="/admin/change-role/{{this._id}}" method="POST">
+    <input name="changeRole" id="" value="user" type="hidden">
+    <input type="hidden" name="canView" id="" value="true">
+    <button type="submit">Approve</button>
+  </form>
+  <form action="/admin/delete-user/{{this._id}}" method="GET">
+    <button type="submit">Deny</button>
+  </form>
+    <br>
+    <br>
+
+{{/each}}
 
 {{else}}
 <h1>FORBIDDEN FROM ACCESSING THIS PAGE</h1>

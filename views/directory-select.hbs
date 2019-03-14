@@ -1,9 +1,9 @@
-<h1>Here you will select the directories you want to download stuff from</h1>
 <br>
 <p>If you wish to upload to the server click <a href='/upload'>here</a></p>
+<h5>Files uploaded:</h5>
 <br>
 {{#each filesFromDB}}
-<div>
+<div class="card">
   Title: {{this.title}}
   <br>
   Author: {{this.author}}
@@ -13,10 +13,17 @@
   Language: {{this.language}}
   <br>
   <br>
+  Uploaded by: {{this.uploadedBy}}
+  <br>
   <form action="/download/{{this.filename}}" method="GET">
-    <button type="submit">Download</button>
+    <button type="submit" id="download-button">Download</button>
   </form>
+  {{#if ../admin}}
   <br>
-  <br>
+  <form action="/delete/{{this.filename}}" method="GET">
+    <button type="submit">Delete file</button>
+  </form>
+  {{/if}}
 </div>
+<br>
 {{/each}}

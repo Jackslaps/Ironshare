@@ -57,6 +57,7 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
     language: req.body.language,
     description: req.body.description,
     isCopyright: req.body.isCopyright,
+    uploadedBy: req.session.user
   })
   .then(newFile => {
     console.log("before save: ", newFile)
@@ -124,8 +125,18 @@ router.get('/directory-select', (req, res, next) => {
   })
 })
 
+router.get('/delete/:filename', (req, res, next) => {
+  const fileName = req.params.filename;
+
+  gfs.remove({filename: fileName, root: 'uploads'}, (err, gridStore) => {
+    console.log("error: ", err)
+  })
+
+  File.findOneAndDelete({filename: fileName})
+  .then( () => {
+    res.redirect('/directory-select');
+  })
+  
+})
+
 module.exports = router;
-
-
-
-

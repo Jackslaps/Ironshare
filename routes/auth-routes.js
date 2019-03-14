@@ -4,11 +4,6 @@ const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
 
-//Display admin page
-router.get('/admin', (req, res, next) => {
-  res.render('auth/admin');
-})
-
 //Display login page
 router.get('/login', (req, res, next) => {
     res.render('auth/login');

@@ -1,15 +1,49 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
-
-a {
-  color: #00B7FF; }
-
-nav a {
-  padding: 10px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
+  background-color: darkgrey;
 }
 
-#admin-create-user-form {
+a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+nav {
+  display: flex;
+  list-style-type: none;
+  background-color: #333;
+  position: sticky;
+}
+
+nav a {
+  margin: 10px;
+  color: white;
+}
+
+nav a:hover {
+  color: white;
+  background-color: crimson;
+  text-decoration: none;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.1s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#admin-create-user-button-form {
   display: none;
 }
 
