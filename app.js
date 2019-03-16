@@ -41,7 +41,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = '【Ｉ　Ｒ　Ｏ　Ｎ 　Ｓ　Ｈ　Ａ　Ｒ　Ｅ】';
+app.locals.title = '「Ｉ　Ｒ　Ｏ　Ｎ 　Ｓ　Ｈ　Ａ　Ｒ　Ｅ」';
 
 //Handlebar Helpers
 hbs.registerHelper('if_eq', function(a, b, opts) {
