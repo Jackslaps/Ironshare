@@ -14,14 +14,26 @@
 </head>
 <body>
   <nav>
+    <div class="nav-left">
+      {{#if currentUser}}
+      {{else}}
+      <span id="guest-header">If you would like to have access to the site, please click<a href="/create-account">here</a></span>
+      {{/if}}
       {{#if admin}}
       <a href="/admin">Admin</a>
       {{/if}}
       {{#if canView}}
       <a href="/directory-select">File Directory</a>
       <a href="/upload">Upload files</a>
-      <a href="/logout">Log out</a>
       {{/if}}
+    </div>
+    <div>
+      {{#if currentUser}}
+        <a href="/logout">Log out</a>
+      {{else}}
+        <a href="/login">Log In</a>
+      {{/if}}
+    </div>
   </nav>
 
   {{{body}}}

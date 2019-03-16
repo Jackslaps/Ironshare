@@ -1,7 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
-  background-color: darkgrey;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: gainsboro;
 }
 
 a {
@@ -15,36 +15,63 @@ a:hover {
 
 nav {
   display: flex;
-  list-style-type: none;
   background-color: #333;
-  position: sticky;
+  position: fixed;
+  top: 0;
+  width: 93vw; 
+  justify-content: space-between;
+  margin: 0%;
+  padding: 10px 20px;
+  z-index: 1; 
+}
+
+.nav-left {
+  display: block;
 }
 
 nav a {
-  margin: 10px;
+  /* display: inline-block; */
+  width: auto;
+  padding: 0px 15px;
   color: white;
+  transition: 0.2s;
 }
 
 nav a:hover {
+  display: inline-block;
   color: white;
-  background-color: crimson;
+  text-align: center;
   text-decoration: none;
+  background-color: crimson;
+  transition: 0.2s;
 }
 
 .card {
-  /* Add shadows to create the "card" effect */
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.1s;
+  width: 45vw;
 }
 
-/* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-#admin-create-user-button-form {
+#admin-create-user-form {
   display: none;
 }
 
-/*# sourceMappingURL=style.css.map */
+#title-logo {
+  position: relative;
+  text-align: center;
+  top: 35vh;
+  font-size: 90px;
+}
+
+#guest-header {
+  color: white;
+}
+
+.admin-categories {
+  text-decoration-line: underline;
+}

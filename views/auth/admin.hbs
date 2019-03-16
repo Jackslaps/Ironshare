@@ -21,10 +21,10 @@
   </form>
   <br>
   <br>
-  <h5>Manage Users</h5>
+  <h5 class="admin-categories">Manage Users</h5>
   <br>
   {{#each usersFromDB}}
-  <div class="card>">
+  <div class="card">
     Email: {{this.email}}
     <br>
     Role: {{this.role}}
@@ -48,36 +48,32 @@
 <br>
 <br>
 
-Approvals:
+<h5 class="admin-categories">Approvals:</h5>
 
 {{#each unapprovedFromDB}}
     <br>
     <br>
-  {{this.email}}
+  <div class="card">
+    Email: {{this.email}}
+      <br>
+      <br>
+    Relation to server: {{this.relation}}
+      <br>
+      <br>
+    <form action="/admin/change-role/{{this._id}}" method="POST">
+      <input name="changeRole" id="" value="user" type="hidden">
+      <input type="hidden" name="canView" id="" value="true">
+      <button type="submit">Approve</button>
+    </form>
     <br>
-  {{this.relation}}
+    <form action="/admin/delete-user/{{this._id}}" method="GET">
+      <button type="submit">Deny</button>
+    </form>
+  </div>
     <br>
     <br>
-  <form action="/admin/change-role/{{this._id}}" method="POST">
-    <input name="changeRole" id="" value="user" type="hidden">
-    <input type="hidden" name="canView" id="" value="true">
-    <button type="submit">Approve</button>
-  </form>
-  <form action="/admin/delete-user/{{this._id}}" method="GET">
-    <button type="submit">Deny</button>
-  </form>
-    <br>
-    <br>
-
 {{/each}}
 
 {{else}}
 <h1>FORBIDDEN FROM ACCESSING THIS PAGE</h1>
 {{/if}}
-
-  <script>$(document).ready(function(){
-    $("#create-user-button").click(function(){
-        $("#admin-create-user-form").toggle();
-      });
-    });
-  </script>

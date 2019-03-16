@@ -39,8 +39,9 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+
 // default value for title local
-app.locals.title = 'Ironshare';
+app.locals.title = '【Ｉ　Ｒ　Ｏ　Ｎ 　Ｓ　Ｈ　Ａ　Ｒ　Ｅ】';
 
 //Handlebar Helpers
 hbs.registerHelper('if_eq', function(a, b, opts) {
@@ -72,6 +73,9 @@ app.use((req, res, next) => {
   if(req.session.user.role === "admin") { admin = true};
   if(req.session.user.canView === true) { canView = true};
 
+  req.session.user.role === 'guest' ? res.locals.guest = true : res.locals.guest = false
+  
+  res.locals.currentUser = req.session.user;
   res.locals.admin = admin;
   res.locals.canView = canView;
   next()
